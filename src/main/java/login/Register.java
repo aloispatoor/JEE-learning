@@ -14,14 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Register")
 public class Register extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Register() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,14 +39,15 @@ public class Register extends HttpServlet {
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
 			out.println("	<head>");
+			out.println("	<link rel='stylesheet' type='text/css' href='style.css'></link>");
 			out.println("	</head>");
 			out.println("	<body>");
 			out.println("		<h1>Veuillez vous inscrire</h1>");
 			out.println("		<h2>" + new Date() + "</h2>");
 			if(error != null) {
-				out.println("		<p>" + error + "</p>");
+				out.println("		<p class='error'>" + error + "</p>");
 			} else {
-				System.out.println("Error null");
+				System.out.println("Pas d'erreur, c'est lesieur");
 			}
 			out.println("		<form method='POST'>");
 			out.println("			<input name='txtLogin' type='email' placeholder='login'>");
@@ -97,7 +90,7 @@ public class Register extends HttpServlet {
 			doGet(request, response);
 		}else {
 			try (PrintWriter out = response.getWriter() ){
-				out.println("GG, you're registered! Your e-mail is " + login + " and your password is " + password + ". Keep it precisouly!");
+				out.println("GG, you're registered! Your e-mail is " + login + " and your password is " + password + ". Keep it preciously!");
 				doGet(request, response);
 			}
 		}

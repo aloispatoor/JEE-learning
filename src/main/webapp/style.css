@@ -1,1 +1,15 @@
 @charset "UTF-8";
+
+body{
+	background: #303030;
+	color: white;
+	font-family: sans-serif;
+}
+
+h1, h2, p, form{
+	text-align:center;
+}
+
+.error{
+	color: #ff2b2b;
+}

@@ -29,6 +29,7 @@ public class login extends HttpServlet {
 			out.println("<!DOCTYPE html>");
 			out.println("<html>");
 			out.println("	<head>");
+			out.println("	<link rel='stylesheet' type='text/css' href='style.css'></link>");
 			out.println("	</head>");
 			out.println("	<body>");
 			out.println("		<h1>Veuillez vous identifier</h1>");
