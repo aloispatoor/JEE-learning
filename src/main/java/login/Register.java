@@ -31,24 +31,16 @@ public class Register extends HttpServlet {
 		String login = request.getParameter("txtLogin");
 		String password = request.getParameter("txtPassword");
 		String password2 = request.getParameter("txtPassword2");
-		
+		String error = (String) request.getAttribute("error");
 				
-		if (login == null) {
-			login = "";
-		}
-
-		if (password == null) {
-			password = ""; 
-		}
-		
-		if (password2 == null) {
-			password2 = ""; 
-		}
+		if (login == null) login = "";
+		if (password == null) password = ""; 
+		if (password2 == null) password2 = ""; 
 				
 		System.out.println(login + " - " + password + " - " + password2);
 		
-		
 		response.setContentType("text/html");
+		
 		
 		//BIZARRE
 		try (PrintWriter out = response.getWriter() ){
@@ -59,6 +51,11 @@ public class Register extends HttpServlet {
 			out.println("	<body>");
 			out.println("		<h1>Veuillez vous inscrire</h1>");
 			out.println("		<h2>" + new Date() + "</h2>");
+			if(error != null) {
+				out.println("		<p>" + error + "</p>");
+			} else {
+				System.out.println("Error null");
+			}
 			out.println("		<form method='POST'>");
 			out.println("			<input name='txtLogin' type='email' placeholder='login'>");
 			out.println("			<input name='txtPassword' type='password' placeholder='password'>");
@@ -75,39 +72,37 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String login = request.getParameter("txtLogin");
 		String password = request.getParameter("txtPassword");
 		String password2 = request.getParameter("txtPassword2");
 		
+		response.setContentType("text/html");
+		
 		// VERIFS
-		if (login == null) {
-			try (PrintWriter out = response.getWriter() ){
-				out.println("Error: login can't be null");
-			}
+		if (login == null || login == "") {
+			request.setAttribute("error", "Login can't be null");
+			doGet(request, response);
 		}else if(!login.contains("@")){
-			try (PrintWriter out = response.getWriter() ){
-				out.println("Error: You have to tape an email");
-			}
-		}else if (password == null) {
-			try (PrintWriter out = response.getWriter() ){
-				out.println("Error: You have to tape a password");
-			}
+			request.setAttribute("error", "Login have to be an email");
+			doGet(request, response);
+		}else if (password == null || password == "") {
+			request.setAttribute("error", "Password can't be null");
+			doGet(request, response);
 		}else if (password.length() < 9) {
-			try (PrintWriter out = response.getWriter() ){
-				out.println("Error: You have to tape a password with more than 8 characters");
-			}
+			request.setAttribute("error", "Password must have more than 8 character");
+			doGet(request, response);
 		}else if (!password.equals(password2)) {
-			try (PrintWriter out = response.getWriter() ){
-				out.println("Error: The password inputs aren't identical");
-			}
+			request.setAttribute("error", "Passwords aren't indentical");
+			doGet(request, response);
 		}else {
 			try (PrintWriter out = response.getWriter() ){
 				out.println("GG, you're registered! Your e-mail is " + login + " and your password is " + password + ". Keep it precisouly!");
+				doGet(request, response);
 			}
 		}
 		
-		response.setContentType("text/html");
-		doGet(request, response);
+		
 	}
 
 }
