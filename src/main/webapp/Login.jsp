@@ -14,15 +14,13 @@
 	<h1>Log in</h1>
 	<h2><%= new Date () %></h2>
 	<%
-			String login = request.getParameter("txtLogin");
-			String password = request.getParameter("txtPassword");
-			
-			if(login == null) login = "";
-			if(password == null) password = "";
-			
-			if(request.getMethod().equals("POST" && login.equals("java") && password.equals("jee")){
+		String login = request.getParameter("txtLogin");
+		String password = request.getParameter("txtPassword");
 		
-		%>
+		if(login == null) login = "";
+		if(password == null) password = "";
+		
+		if(request.getMethod().equals("POST" && login.equals("java") && password.equals("jee")){%>
 	<p>Welcome XXX</p>
 	<% } else { %>
 	<form method="POST" action="">

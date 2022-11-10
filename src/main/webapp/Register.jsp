@@ -11,7 +11,7 @@
         <link rel='stylesheet' type='text/css' href='style.css' />
     </head>
     <body>
-        <h1>Log in</h1>
+        <h1>Sign In</h1>
         <h2><%= new Date () %></h2>
         <form method="POST" action="">
             <input name="txtLogin" type="email" placeholder="login">
@@ -22,6 +22,7 @@
         <%
             String login = request.getParameter("txtLogin");
             String password = request.getParameter("txtPassword");
+            String password2 = request.getParameter("txtPassword2");
             String error = (String) request.getAttribute("error");
             
             if(login == null) login = "";
@@ -40,7 +41,7 @@
             <%  } else if (!password.equals(password2)) { %>
                     <p>Error: Both password input have to be identical</p>
             <%  } else { %>
-            <p> Welcome <%= login %>, your password is <%= password %>, keep it preciously!</p>
+            	<p> Welcome <%= login %>, your password is <%= password %>, keep it preciously!</p>
             <%}
         } %>
     </body>
